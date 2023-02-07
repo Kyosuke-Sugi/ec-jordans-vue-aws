@@ -19,7 +19,10 @@ const getInfo = async() => {
 
         if(data) {
             console.log(data);
-            stocks.value = data
+            console.log(stocks);
+            console.log(stocks.value);
+            stocks.value = data;
+            console.log(stocks);
             console.log(stocks.value);
         }
     }catch (error) {
@@ -31,13 +34,15 @@ const getInfo = async() => {
 <template>
     <ul class="grid grid-cols-5 w-full">
         <li v-for="stock in stocks" :key="stock.id" class="text-center align-middle w-full">
-            <div class="w-44 h-44 mx-auto">
-                <img :src="stock.image1" :alt="stock.items.name" class="w-full h-full">
-            </div>
-            <div class="w-full">
-                <p>{{ stock.items.name }}</p>
-                <p>￥{{ stock.price }}</p>
-            </div>
+            <RouterLink :to="{name: 'stock', params: {id: stock.id}}">
+                <div class="w-44 h-44 mx-auto">
+                    <img :src="stock.image1" :alt="stock.items.name" class="w-full h-full">
+                </div>
+                <div class="w-full">
+                    <p>{{ stock.items.name }}</p>
+                    <p>￥{{ stock.price }}</p>
+                </div>
+            </RouterLink>
         </li>
     </ul>
 </template>
