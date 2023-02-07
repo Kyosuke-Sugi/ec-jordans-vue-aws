@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 import MyHeader from "./components/MyHeader.vue";
-import SearchBox from "./components/SearchBox.vue";
+import MyFooter from "./components/MyFooter.vue";
 </script>
 
 <template>
   <MyHeader />
   <RouterView />
+  <MyFooter />
 </template>
