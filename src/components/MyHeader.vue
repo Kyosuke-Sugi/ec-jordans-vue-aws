@@ -32,5 +32,6 @@
         </ul>
       </nav>
     </div>
+    <img src="../assets/images/header.jpg" alt="ヘッダー画像">
   </header>
 </template>
