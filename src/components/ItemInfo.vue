@@ -2,15 +2,13 @@
 import { ref, toRef } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 import { computed } from "vue";
+import CartButton from "../components/cart/CartButton.vue";
 
 const stock  = defineProps(['detail']);
 
 const data = computed(() => {
     return stock?.detail
 })
-// onMounted(() => {
-//     data.value = stockInfo.test
-// })
 
 console.log(stock);
 </script>
@@ -53,10 +51,10 @@ console.log(stock);
                   </dl>
                 </div>
                 <div class="flex justify-around">
-                    <button class=" w-36 h-20 p-2 bg-amber-200 rounded-xl text-black shadow">お気に入りに追加</button>
-                    <button class="w-36 h-20 p-2 bg-emerald-400 rounded-xl text-black shadow">カートに追加</button>
+                  <button class=" w-36 h-20 p-2 bg-amber-200 rounded-xl text-black shadow">お気に入りに追加</button>
+                  <CartButton :cart="data" />
                 </div>
-              </div>
+            </div>
         </div>
     </div>
 </template>

@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+import LocalCart from "../components/cart/LocalCart.vue"
+</script>
+
 <template>
-    <p>こちらはカートページです</p>
+    <LocalCart />
 </template>
