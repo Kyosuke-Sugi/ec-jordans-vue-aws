@@ -12,7 +12,7 @@ const data = computed(() => {
 //     data.value = stockInfo.test
 // })
 
-// console.log(stockInfo);
+console.log(stock);
 </script>
 
 <template>

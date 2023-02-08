@@ -1,30 +1,18 @@
 <script lang="ts" setup>
+import { useCounterStore } from "@/stores/counter";
 import { ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
+import { storeToRefs } from "pinia";
 import type { Ref } from "vue";
 import { supabase } from "../supabase";
 
-const stocks: Ref<any> = ref([]);
+const store = useCounterStore();
+const { stocks } = storeToRefs(store);
 
 onMounted(() => {
-    getInfo()
+    store.getAllStocks();
 })
 
-const getInfo = async() => {
-    try {
-        let { data, error, status } = await supabase
-            .from("stocks")
-            .select("*,items(*)");
-
-        if (error && status !== 406) throw error
-
-        if(data) {
-            stocks.value = data;
-        }
-    }catch (error: any) {
-        alert(error.message);
-    }
-} 
 </script>
 
 <template>
