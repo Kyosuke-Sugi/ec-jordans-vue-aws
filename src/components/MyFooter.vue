@@ -1,7 +1,3 @@
-<script>
-
-</script>
-
 
 <template>
     <footer class="bg-[#dde5eb] w-full flex justify-between p-7">
