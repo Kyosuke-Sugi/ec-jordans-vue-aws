@@ -27,7 +27,9 @@
             </RouterLink>
           </li>
           <li key="login" class="text-[#2c3047ba] w-full">
-            <button>ログイン</button>
+            <RouterLink to="/login" class="p-5">
+              <span>ログイン</span>
+            </RouterLink>
           </li>
         </ul>
       </nav>

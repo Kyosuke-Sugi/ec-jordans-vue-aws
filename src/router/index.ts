@@ -4,6 +4,7 @@ import StockView from "../views/StockView.vue";
 import ContactView from "../views/ContactView.vue";
 import PurchaseView from "../views/PurchaseView.vue";
 import SignUpView from "../views/SignUpView.vue";
+import LogInView from "../views/LogInView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,11 @@ const router = createRouter({
       path: "/signup",
       name: "signup",
       component: SignUpView
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: LogInView
     },
   ],
 });

@@ -1,0 +1,25 @@
+<template>
+    <div>
+        <div>
+          <p>メールアドレス</p>
+          <input
+            placeholder="sample@example.com"
+            type="text"
+            name="id"
+          />
+          <p>パスワード</p>
+          <input
+            type="password"
+            placeholder="Password"
+            name="pw"
+          />
+          <br />
+          <span>
+            <input
+              type="button"
+              value="ログイン"
+            />
+          </span>
+        </div>
+      </div>
+</template>
