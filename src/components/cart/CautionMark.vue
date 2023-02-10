@@ -34,29 +34,25 @@ const rejectCombine = (localCart: any, stockID: number) => {
 </script>
 
 <template>
-    <div>
-        <div>
-          <div>注意！</div>
-          <p>ログイン前のカートに商品があります。</p>
-          <p>現在のアカウントのカートにその商品を移動しますか？</p>
-          <div>
-              <p>ゲストのカート内</p>
-              <ul>
-                <li v-for="stock in localCart">
-                  <div class=" w-28">
-                    <img 
-                    class="w-full"
-                    :src="stock.image1" 
-                    :alt="stock.items?.name"
-                    >
-                  </div>
-                  <p>{{ stock.items?.name }}</p>
-                  <button @click="combineCart(memberCart, localCart, stock.id)">カートに入れる</button>
-                  <button @click="rejectCombine(localCart, stock.id)">キャンセル</button>
-                </li>
-              </ul>
-          </div>
-          
-        </div>
-      </div>
+  <div>
+    <div class=" text-red-600 font-bold text-xl mb-2">注意！</div>
+    <p class=" font-bold">ログイン前のカートに商品があります。現在のカートに追加しますか？</p>
+    <div class="my-8">
+        <ul class="flex justify-start">
+          <li class=" w-48 mx-4 border-r border-r-slate-300 " v-for="stock in localCart">
+            <div class="w-28">
+              <img 
+              class="w-full"
+              :src="stock.image1" 
+              :alt="stock.items?.name"
+              >
+            </div>
+            <p class="w-40 text-ellipsis overflow-hidden whitespace-nowrap mb-2">{{ stock.items?.name }}</p>
+            <button class=" text-sm bg-blue-100 w-14 p-1 rounded-xl mx-1" @click="combineCart(memberCart, localCart, stock.id)">追加</button>
+            <button class="text-sm bg-slate-100 w-20 p-1 rounded-2xl mx-1" @click="rejectCombine(localCart, stock.id)">キャンセル</button>
+          </li>
+        </ul>
+    </div>          
+  </div>
+
 </template>

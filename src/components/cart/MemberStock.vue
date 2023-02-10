@@ -24,7 +24,7 @@ const deleteItem = async (userID:number, stockID:number) => {
 </script>
 
 <template>
-    <CautionMark v-if="localCart.length" />
+    <CautionMark class="w-3/4 mx-auto" v-if="localCart.length" />
     <div class="flex justify-between w-3/4 mx-auto mb-8">
         <ul>
           <li v-for="cart in memberCart" class=" mb-4 py-5 border-b-2 " :key="cart.stocks.id">
