@@ -5,6 +5,7 @@ import ContactView from "../views/ContactView.vue";
 import PurchaseView from "../views/PurchaseView.vue";
 import SignUpView from "../views/SignUpView.vue";
 import LogInView from "../views/LogInView.vue";
+import SettlementView from "../views/SettlementView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,6 +47,11 @@ const router = createRouter({
       path: "/login",
       name: "login",
       component: LogInView
+    },
+    {
+      path: "/settlement",
+      name: "settlement",
+      component: SettlementView
     },
   ],
 });

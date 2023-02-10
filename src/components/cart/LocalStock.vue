@@ -62,8 +62,11 @@ const deleteItem = (localCart: any, id: number) => {
             <p v-if="localCart?.length">合計：￥{{ (total + 500).toLocaleString() }}（税込）</p>
             <p v-else>合計：￥{{ total.toLocaleString() }}（税込）</p>
           </div>
-          <div class="clear-both float-right my-7">
-            <button v-if="localCart.length" class="w-36 h-10 p-2 bg-red-200 rounded-xl text-black shadow">購入画面へ</button>
+          <div v-if="localCart.length" class="clear-both float-right text-center my-7">
+            <p class="text-red-700 font-bold mb-6">購入するにはログインしてください</p>
+            <RouterLink to="/login">
+              <button class="w-36 h-10 p-2 bg-red-200 rounded-xl text-black shadow">ログインする</button>
+            </RouterLink>
           </div>
         </div>
       </div>

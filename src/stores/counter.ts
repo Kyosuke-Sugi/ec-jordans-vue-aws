@@ -31,7 +31,7 @@ export const useCounterStore = defineStore("stocks", {
               this.stocks = data;
           }
       }catch (error: any) {
-          alert(error.message);
+          console.log(error.message);
       }
     },
 

@@ -58,7 +58,7 @@ export const useCartStore = defineStore("cart", {
             .reduce((prev: number, curr: number) => prev + curr, 0);
         }
       }catch (error: any) {
-          alert(error.message);
+          console.log(error.message);
       }
     },
     async addMemberCart (userID: number, stockID: number) {
@@ -77,7 +77,7 @@ export const useCartStore = defineStore("cart", {
         if(data) {
         }
       }catch (error: any) {
-        alert(error.message);
+        console.log(error.message);
       }
     },
     async deleteMemberCart (userID: number, stockID: number) {
@@ -90,11 +90,8 @@ export const useCartStore = defineStore("cart", {
 
         if (error && status !== 406) throw error
 
-        if(data) {
-           
-        }
       }catch (error: any) {
-          alert(error.message);
+          console.log(error.message);
       }
     }
   }

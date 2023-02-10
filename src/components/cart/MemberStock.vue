@@ -67,7 +67,9 @@ const deleteItem = async (userID:number, stockID:number) => {
               <p v-else>合計：￥{{ total.toLocaleString() }}（税込）</p>
             </div>
             <div class="clear-both float-right my-7">
-              <button v-if="memberCart.length" class="w-36 h-10 p-2 bg-red-200 rounded-xl text-black shadow">購入画面へ</button>
+              <RouterLink to="/settlement">
+                <button v-if="memberCart.length" class="w-36 h-10 p-2 bg-red-200 rounded-xl text-black shadow">購入画面へ</button>
+              </RouterLink>
             </div>
           </div>
         </div>
