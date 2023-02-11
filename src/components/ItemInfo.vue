@@ -1,14 +1,27 @@
 <script setup lang="ts">
+import { useCookie } from "@/useCookie";
 import { ref, toRef } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 import { computed } from "vue";
+import { useRouter } from "vue-router";
 import CartButton from "../components/cart/CartButton.vue";
 
 const stock  = defineProps(['detail']);
+const router = useRouter();
 
 const data = computed(() => {
     return stock?.detail
 })
+
+const addFavo = () => {
+  const userID = useCookie();
+
+  if(userID) {
+    console.log("お気に入り成功");
+  }else {
+    router.push("/login");
+  }
+}
 
 console.log(stock);
 </script>
@@ -51,7 +64,7 @@ console.log(stock);
                   </dl>
                 </div>
                 <div class="flex justify-around">
-                  <button class=" w-36 h-20 p-2 bg-amber-200 rounded-xl text-black shadow">お気に入りに追加</button>
+                  <button @click="addFavo" class=" w-36 h-20 p-2 bg-amber-200 rounded-xl text-black shadow">お気に入りに追加</button>
                   <CartButton :cart="data" />
                 </div>
             </div>
