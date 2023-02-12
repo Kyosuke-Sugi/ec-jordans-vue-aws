@@ -8,6 +8,8 @@ type State = {
   allTotal: number;
   keyword: string;
   series: string;
+  page: number,
+  limit: number,
   images: string[] | [];
 }
 
@@ -18,6 +20,8 @@ export const useCounterStore = defineStore("stocks", {
     allTotal: 0,
     keyword: "",
     series: "",
+    page: 1,
+    limit: 15,
     images: [],
   }) as State, 
   getters: {
@@ -26,8 +30,7 @@ export const useCounterStore = defineStore("stocks", {
     },
   },
   actions: {
-    async getAllStocks () {
-
+    async getAllSize () {
       try {
           let { data, error, status } = await supabase
               .from("stocks")
@@ -36,15 +39,44 @@ export const useCounterStore = defineStore("stocks", {
           if (error && status !== 406) throw error
 
           if(data) {
-              this.keyword = "";
-              this.series = "";
-              this.total = 0;
-              this.stocks = data;
               this.allTotal = data.length;
           }
       }catch (error: any) {
           console.log(error.message);
       }
+    },
+    async getPagingStocks (page: number, limit: number) {
+      const start = limit * (page - 1);
+      const end = start + limit - 1;
+      try {
+        let { data, error, status } = await supabase
+            .from("stocks")
+            .select("*,items(*)")
+            .range(start, end);
+
+        if (error && status !== 406) throw error
+
+        if(data) {
+            this.keyword = "";
+            this.series = "";
+            this.total = 0;
+            this.stocks = data;
+        }
+    }catch (error: any) {
+        console.log(error.message);
+    }
+    },
+    prevPage () {
+      this.page--;
+      window.scrollTo(0, 0);
+    },
+    nextPage () {
+      this.page++;
+      window.scrollTo(0, 0);
+    },
+    jumpPage (num: number) {
+      this.page = num;
+      window.scrollTo(0, 0);
     },
     async getSeriesResult (name: string) {
       try {
@@ -60,6 +92,7 @@ export const useCounterStore = defineStore("stocks", {
             this.stocks = result;
             this.series = name;
             this.total = result.length;
+            this.allTotal = data.length;
         }
       }catch (error: any) {
             console.log(error.message);
@@ -79,6 +112,7 @@ export const useCounterStore = defineStore("stocks", {
           this.keyword = keyword;
           this.series = "";
           this.total = result.length;
+          this.allTotal = data.length;
         }
       }catch (error: any) {
             console.log(error.message);

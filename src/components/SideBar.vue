@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useCounterStore } from '@/stores/counter';
+import { storeToRefs } from 'pinia';
 
 const store = useCounterStore();
+const { page, limit } = storeToRefs(store);
 
 const data = ref({
     notifyFrequency: ""
@@ -18,7 +20,7 @@ const handleFrequency = (e: any) => {
     if(e.target.checked) {
         store.getSeriesResult(e.target.value);
     } else {
-        store.getAllStocks();
+        store.getPagingStocks(page.value, limit.value);
     }
 }
 </script>

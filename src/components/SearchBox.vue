@@ -1,13 +1,19 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useCounterStore } from '@/stores/counter';
+import { storeToRefs } from 'pinia';
 
 const store = useCounterStore();
+const { page, limit } = storeToRefs(store);
 const keyword = ref("");
 
 const handleSearch = (e: any) => {
   e.preventDefault();
-  store.getSearchResult(keyword.value);
+  if(keyword.value) {
+    store.getSearchResult(keyword.value);
+  }else {
+    store.getPagingStocks(page.value, limit.value);
+  }
 }
 
 </script>
