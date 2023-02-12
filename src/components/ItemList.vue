@@ -16,6 +16,19 @@ onMounted(() => {
 </script>
 
 <template>
+    <div class="text-center text-lg my-5" v-if="store.series">
+        <p>「{{ store.series }}」シリーズの絞り込み結果</p>
+        <p class="py-3">全{{ store.allTotal }}品中<span class="font-bold px-3">{{ store.total }}</span>品</p>
+    </div>
+    <div class="text-center text-lg my-5" v-if="store.keyword">
+        <div v-if="store.stocks.length">
+          <p>「{{ store.keyword }}」の検索結果</p>
+          <p class="py-3">全{{ store.allTotal }}品中<span class="font-bold px-3">{{ store.total }}</span>品</p>
+        </div>
+        <div v-else>
+          <p>「{{ store.keyword }}」に一致する商品はありませんでした</p>
+        </div>
+    </div>
     <ul class="grid grid-cols-5 w-full">
         <li v-for="stock in stocks" :key="stock.id" class="text-center align-middle w-full">
             <RouterLink :to="{name: 'stock', params: {id: parseInt(stock.id)}}">

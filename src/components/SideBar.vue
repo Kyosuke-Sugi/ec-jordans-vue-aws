@@ -1,3 +1,28 @@
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { useCounterStore } from '@/stores/counter';
+
+const store = useCounterStore();
+
+const data = ref({
+    notifyFrequency: ""
+});
+
+const handleFrequency = (e: any) => {
+    if(e.target.value === data.value.notifyFrequency){
+        data.value.notifyFrequency = "";
+    }else {
+        data.value.notifyFrequency = e.target.value;
+    }
+
+    if(e.target.checked) {
+        store.getSeriesResult(e.target.value);
+    } else {
+        store.getAllStocks();
+    }
+}
+</script>
+
 <template>
     <div class="bg-[#fbf1e9] h-full sticky -top-52">
         <div class="bg-[#35325c] m-2">
@@ -14,6 +39,8 @@
                     name="interest"
                     value="POSITE SERIES"
                     class="peer hidden w-full"
+                    :checked="data.notifyFrequency === 'POSITE SERIES'"
+                    @change="handleFrequency"
                     />
                     <label htmlFor="posite" class="block text-lg text-[#fbf1e9] w-full p-4 cursor-pointer peer-checked:bg-[#9373b0] peer-checked:text-[#d3d1ed]">POSITE SERIES</label>
                 </div>
@@ -24,6 +51,8 @@
                     name="interest"
                     value="AIR FORCE 1 LOW"
                     class="peer hidden w-full"
+                    :checked="data.notifyFrequency === 'AIR FORCE 1 LOW'"
+                    @change="handleFrequency"
                     />
                     <label htmlFor="force" class="block text-lg text-[#fbf1e9] w-full p-4 cursor-pointer peer-checked:bg-[#9373b0] peer-checked:text-[#d3d1ed]">AIR FORCE 1 LOW</label>
                 </div>
@@ -34,6 +63,8 @@
                     name="JORDAN1"
                     value="JORDAN BRAND 1"
                     class="peer hidden w-full"
+                    :checked="data.notifyFrequency === 'JORDAN BRAND 1'"
+                    @change="handleFrequency"
                     />
                     <label htmlFor="JORDAN1" class="block text-lg text-[#fbf1e9] w-full p-4 cursor-pointer peer-checked:bg-[#9373b0] peer-checked:text-[#d3d1ed]">JORDAN BRAND 1</label>
                 </div>
@@ -44,6 +75,8 @@
                     name="JORDAN5"
                     value="JORDAN BRAND 5"
                     class="peer hidden w-full"
+                    :checked="data.notifyFrequency === 'JORDAN BRAND 5'"
+                    @change="handleFrequency"
                     />
                     <label htmlFor="JORDAN5" class="block text-lg text-[#fbf1e9] w-full p-4 cursor-pointer peer-checked:bg-[#9373b0] peer-checked:text-[#d3d1ed]">JORDAN BRAND 5</label>
                 </div>
@@ -54,6 +87,8 @@
                     name="JORDAN6"
                     value="JORDAN BRAND 6"
                     class="peer hidden w-full"
+                    :checked="data.notifyFrequency === 'JORDAN BRAND 6'"
+                    @change="handleFrequency"
                     />
                     <label htmlFor="JORDAN6" class="block text-lg text-[#fbf1e9] w-full p-4 cursor-pointer peer-checked:bg-[#9373b0] peer-checked:text-[#d3d1ed]">JORDAN BRAND 6</label>
                 </div>
@@ -64,6 +99,8 @@
                     name="BLAZER"
                     value="BLAZER"
                     class="peer hidden w-full"
+                    :checked="data.notifyFrequency === 'BLAZER'"
+                    @change="handleFrequency"
                     />
                     <label htmlFor="BLAZER" class="block text-lg text-[#fbf1e9] w-full p-4 cursor-pointer peer-checked:bg-[#9373b0] peer-checked:text-[#d3d1ed]">BLAZER</label>
                 </div>
@@ -74,6 +111,8 @@
                     name="AIR MAX"
                     value="AIR MAX"
                     class="peer hidden w-full"
+                    :checked="data.notifyFrequency === 'AIR MAX'"
+                    @change="handleFrequency"
                     />
                     <label htmlFor="AIR MAX" class="block text-lg text-[#fbf1e9] w-full p-4 cursor-pointer peer-checked:bg-[#9373b0] peer-checked:text-[#d3d1ed]">AIR MAX</label>
                 </div>
@@ -84,6 +123,8 @@
                     name="DUNK"
                     value="DUNK"
                     class="peer hidden w-full"
+                    :checked="data.notifyFrequency === 'DUNK'"
+                    @change="handleFrequency"
                     />
                     <label htmlFor="DUNK" class="block text-lg text-[#fbf1e9] w-full p-4 cursor-pointer peer-checked:bg-[#9373b0] peer-checked:text-[#d3d1ed]">DUNK</label>
                 </div>
