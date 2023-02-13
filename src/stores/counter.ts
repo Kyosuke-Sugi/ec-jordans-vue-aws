@@ -114,7 +114,10 @@ export const useCounterStore = defineStore("stocks", {
           this.series = "";
           this.total = result.length;
           this.allTotal = data.length;
+<<<<<<< HEAD
           window.scrollTo(0, 0);
+=======
+>>>>>>> origin/main
         }
       }catch (error: any) {
             console.log(error.message);
