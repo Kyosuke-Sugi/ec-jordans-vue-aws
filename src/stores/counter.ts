@@ -115,6 +115,7 @@ export const useCounterStore = defineStore("stocks", {
           this.total = result.length;
           this.allTotal = data.length;
           window.scrollTo(0, 0);
+
         }
       }catch (error: any) {
             console.log(error.message);
