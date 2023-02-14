@@ -1,20 +1,12 @@
-import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { supabase } from "@/supabase";
-import { useRouter } from "vue-router";
 
 type User = {
-    userID: string;
-    password: string;
     flag: boolean
 }
 
-const router = useRouter();
-
 export const useLoginStore = defineStore("login", {
   state: () => ({
-    userID: "",
-    password: "",
     flag: false
   }) as User, 
   getters: {
@@ -36,8 +28,6 @@ export const useLoginStore = defineStore("login", {
               this.flag = true;
               throw Error;
             } else {
-              this.userID = obj.id
-              this.password = obj.password
               this.flag = false
 
               const now = new Date();
