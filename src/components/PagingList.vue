@@ -44,7 +44,7 @@ const jump = (num: number) => {
         Next
         </button>
     </div>
-    <div v-else>
+    <div v-else class="text-center my-10">
         <button @click="reset">全商品一覧に戻る</button>
     </div>
 </template>

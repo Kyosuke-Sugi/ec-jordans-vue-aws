@@ -26,7 +26,7 @@ const handleFrequency = (e: any) => {
 </script>
 
 <template>
-    <div class="bg-[#fbf1e9] h-full sticky -top-52">
+    <div class="bg-[#fbf1e9] h-full sticky -top-52 w-1/5">
         <div class="bg-[#35325c] m-2">
             <p class="text-[#fdffc9] text-center py-5">※当店はすべて税込み表記です</p>
             <div class="w-full py-5 border-b-2 border-[#fbf1e9] border-dashed">

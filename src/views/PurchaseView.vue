@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useCookie } from "@/useCookie";
 import { useField, useForm } from "vee-validate";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
@@ -11,8 +12,32 @@ const changeFlag = () => {
   confirmFlag.value = !confirmFlag.value
 }
 const submitContent = () => {
-  alert("送信しました");
-  router.push("/contact");
+  const userID = useCookie();
+  const date = new Date();
+  const today = date.toLocaleDateString();
+  const info = {
+    reception_date: today,
+        user_id: userID,
+        seller_last_name: lastName.value,
+        seller_first_name: firstName.value,
+        seller_kana_last_name: lastKana.value,
+        seller_kana_first_name: firstKana.value,
+        phoneNumber: phoneNumber.value,
+        seller_email: email.value,
+        seller_zip_code: postCode.value,
+        seller_prefecture: prefecture.value,
+        seller_city: city.value,
+        seller_address: address.value,
+        seller_building: building.value,
+        item_name: itemName.value,
+        item_code: itemCode.value,
+        item_size: size.value,
+        item_color: color.value,
+        item_note: message.value,
+        status: "受付済",
+  }
+  console.log(info)
+  router.push("/");
 }
 
 const schema = object({

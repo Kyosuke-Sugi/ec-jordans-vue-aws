@@ -9,10 +9,12 @@ import PagingList from "@/components/PagingList.vue";
   <main>
     <div>
       <div class="flex justify-start">
-        <SideBar class="w-1/5" />
+        <SideBar />
         <div class="w-4/5">
           <SearchBox />
-          <ItemList class="my-7" />
+          <div class="my-7">
+            <ItemList />
+          </div>
           <PagingList />
         </div>
       </div>
