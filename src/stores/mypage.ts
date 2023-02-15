@@ -44,24 +44,22 @@ export const useMyPageStore = defineStore("mypage", {
                 break;
         }
     },
-    // controllOrderFlag () {
-    //     this.orderFlag = !this.orderFlag
-    // },
-    // controllUsedFlag () {
-    //     this.usedFlag = !this.usedFlag
-    // },
     async getFavorite (userID: number) {
         try {
             const { data, error, status } = await supabase
               .from("favorite_items")
-              .select("id,user_id,stocks(item_id,image1,size,price,condition,items(name))")
+              .select("id,user_id,stocks(id,item_id,image1,size,price,condition,items(name))")
               .eq("user_id", userID)
               .order("id", { ascending: false });
         
             if(error && status !== 406) throw error;
 
             if(data) {
-                this.favorite = data
+                if(this.favoFlag) {
+                    this.favorite = data;
+                }else {
+                    this.favorite = data.slice(0, 2);
+                }
             }
 
         } catch (error) {
@@ -111,8 +109,40 @@ export const useMyPageStore = defineStore("mypage", {
         }catch (getError) {
             console.error(getError)
         }
-    }
+    },
+    async addFavorite (userID: number, stockID: number) {
+        try {
+            let { data, error, status } = await supabase
+            .from("favorite_items")
+            .insert([
+              {
+                user_id: userID,
+                stock_id: stockID
+              },
+            ]);
     
+            if (error && status !== 406) throw error
+    
+            if(data) {
+            }
+          }catch (error: any) {
+            console.log(error.message);
+          }
+    },
+    async deleteFavorite (userID: number, stockID: number) {
+        try {
+          let { data, error, status } = await supabase
+          .from("favorite_items")
+          .delete()
+          .eq("user_id", userID)
+          .eq("stock_id", stockID);
+  
+          if (error && status !== 406) throw error
+  
+        }catch (error: any) {
+            console.log(error.message);
+        }
+    },
   }
 
 });

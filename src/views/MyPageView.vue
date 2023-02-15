@@ -26,12 +26,13 @@ const showAll = (value: string) => {
     }
 }
 
-// const showAllInfo = () => {
-//     store.controllUsedFlag();
-//     if(userID.value){
-//         store.getUsedItems(parseInt(userID.value));
-//     }
-// }
+const deleteEvent = async (stockID: number) => {
+    if(userID.value) {
+      await store.deleteFavorite(parseInt(userID.value), stockID);
+      store.getFavorite(parseInt(userID.value));
+    }  
+}
+
 </script>
 
 <template>
@@ -51,15 +52,17 @@ const showAll = (value: string) => {
                         <th class="py-5 border border-blue-100">サイズ</th>
                         <th class="py-5 border border-blue-100">画像</th>
                         <th class="py-5 border border-blue-100">コンディション</th>
+                        <th class="py-5 border border-blue-100"></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr v-for="stock in favorite" :key="stock.stocks.id">
-                        <td class="text-center w-1/5 py-5 border border-slate-200">{{ stock.stocks.items?.name }}</td>
-                        <td class="text-center w-1/5 py-5 border border-slate-200">￥{{ stock.stocks.price.toLocaleString() }}</td>
-                        <td class="text-center w-1/5 py-5 border border-slate-200">{{ stock.stocks.size }}</td>
-                        <td class="text-center w-1/5 py-5 border border-slate-200"><img class="w-1/2 mx-auto" :src="stock.stocks.image1" :alt="stock.stocks.items?.name"></td>
-                        <td class="text-center w-1/5 py-5 border border-slate-200">{{ stock.stocks.condition }}</td>
+                        <td class="text-center w-1/6 py-5 border border-slate-200">{{ stock.stocks.items?.name }}</td>
+                        <td class="text-center w-1/6 py-5 border border-slate-200">￥{{ stock.stocks.price.toLocaleString() }}</td>
+                        <td class="text-center w-1/6 py-5 border border-slate-200">{{ stock.stocks.size }}</td>
+                        <td class="text-center w-1/6 py-5 border border-slate-200"><img class="w-1/2 mx-auto" :src="stock.stocks.image1" :alt="stock.stocks.items?.name"></td>
+                        <td class="text-center w-1/6 py-5 border border-slate-200">{{ stock.stocks.condition }}</td>
+                        <td class="text-center w-1/12 py-5 border border-slate-200"><button @click="deleteEvent(stock.stocks.id)">削除</button></td>
                       </tr>
                     </tbody>
                 </table>

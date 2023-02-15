@@ -4,6 +4,7 @@ import { ref, toRef } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 import { computed } from "vue";
 import { useRouter } from "vue-router";
+import FavoButton from "../components/favorite/FavoButton.vue";
 import CartButton from "../components/cart/CartButton.vue";
 
 const stock  = defineProps(['detail']);
@@ -64,7 +65,7 @@ console.log(stock);
                   </dl>
                 </div>
                 <div class="flex justify-around">
-                  <button @click="addFavo" class=" w-36 h-20 p-2 bg-amber-200 rounded-xl text-black shadow">お気に入りに追加</button>
+                  <FavoButton :favo="data" />
                   <CartButton :cart="data" />
                 </div>
             </div>
