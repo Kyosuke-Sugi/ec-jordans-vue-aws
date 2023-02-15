@@ -64,5 +64,6 @@ onMounted(async () => {
           </tr>
         </tbody>
       </table>
+      <p class="my-5">※<span class="font-semibold">お届け先住所の変更</span>を希望の方は以下の<a class="text-blue-600 font-semibold" href="#changeAddress">備考欄</a>にご記入ください。</p>
     </div>
 </template>

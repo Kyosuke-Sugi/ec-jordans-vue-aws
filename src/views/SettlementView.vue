@@ -5,10 +5,12 @@ import { ref, onMounted } from "vue";
 import { useCartStore } from "@/stores/cart";
 import { storeToRefs } from "pinia";
 import { useCookie } from "@/useCookie";
+import { useRouter } from "vue-router";
 
 const userID: any = ref("");
 const payment = ref("");
 const store = useCartStore();
+const router = useRouter();
 
 const { memberCart, total, localCart } = storeToRefs(store);
 
@@ -17,6 +19,11 @@ onMounted(async () => {
     await store.getMemberCart(userID.value);
     console.log(memberCart.value);
 });
+
+const purchase = () => {
+  alert("購入しました");
+  router.push('/')
+}
 </script>
 
 <template>
@@ -80,7 +87,7 @@ onMounted(async () => {
                     <h2 class="text-lg mb-6 font-bold">発送予定日</h2>
                     <p>購入日から3～5営業日以内に発送いたします</p>
                 </div>
-                <div class="mb-14">
+                <div class="mb-14" id="changeAddress">
                     <p>
                       発送先の住所を変更をご希望の際は備考欄にて【郵便番号・住所（建物名・号室）・宛名】をご記入下さい。
                       <br /> 下記をコピーしてお使いください。
@@ -133,6 +140,7 @@ onMounted(async () => {
                       <button 
                         :disabled="payment === ''" 
                         class="disabled:opacity-70 w-36 h-10 p-2 bg-red-500 rounded-xl text-white shadow"
+                        @click="purchase"
                       >
                         購入する
                       </button>
