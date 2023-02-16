@@ -1,12 +1,14 @@
 <script lang="ts" setup>
+import { supabase } from "@/supabase";
 import { useCookie } from "@/useCookie";
 import { useField, useForm } from "vee-validate";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { object, string, number } from "yup";
 
 const router = useRouter();
 const confirmFlag = ref(false);
+const userID: any = ref("");
 
 const changeFlag = () => {
   confirmFlag.value = !confirmFlag.value
@@ -85,6 +87,39 @@ const { value: itemCode } = useField('itemCode');
 const { value: size } = useField('size');
 const { value: color } = useField('color');
 const { value: message } = useField('message');
+
+onMounted(async () => {
+  userID.value = useCookie();
+  if(userID.value) {
+    try {
+      const { data: getData, error: getError, status } = await supabase
+                .from("users")
+                .select("*")
+                .eq("id", userID.value);
+    
+                if (getError && status !== 406) return getError; 
+                
+                if(getData) {
+                  const user = getData[0];
+                  console.log(user);
+                  lastName.value = user.last_name;
+                  firstName.value = user.first_name;
+                  lastKana.value = user.kana_last_name;
+                  firstKana.value = user.kana_first_name;
+                  phoneNumber.value = user.phone;
+                  email.value = user.email;
+                  postCode.value = user.zip_code;
+                  prefecture.value = user.prefecture;
+                  city.value = user.city;
+                  address.value = user.address;
+                  building.value = user.building;
+                }
+    }catch (getError) {
+      console.error(getError);
+    }
+  }
+});
+
 </script>
 
 <template>
