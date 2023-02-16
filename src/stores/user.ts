@@ -36,7 +36,6 @@ export const useLoginStore = defineStore("login", {
               document.cookie = `userName=${encodeURI(obj.last_name + obj.first_name)};  Path=/; expires=${now.toUTCString()} `;
               history.back();
             }
-            console.log(info)
 
         } catch (error) {
             console.error(error);

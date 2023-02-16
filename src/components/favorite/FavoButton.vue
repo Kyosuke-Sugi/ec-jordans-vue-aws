@@ -18,7 +18,9 @@ const { favorite } = storeToRefs(store);
 
 onMounted(() => {
     userID.value = useCookie();
-    store.getFavorite(userID.value);
+    if(userID.value) {
+      store.getFavorite(userID.value);
+    }
 });
 
 const addFavo = async (stock: any) => {

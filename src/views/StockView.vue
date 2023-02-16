@@ -9,13 +9,16 @@ import { useCounterStore } from "@/stores/counter";
 const router = useRoute();
 const store = useCounterStore();
 const stock = computed(() => {
-    const id: number = parseInt(router.params.id);
+    const id: number = parseInt(router.params.id as string);
     if(store.stocks.length) {
         return store.getOneItem(id);
     }else {
         store.getAllStocks();
         return store.getOneItem(id);
     }
+})
+onMounted(() => {
+    console.log(typeof router.params.id)
 })
 
 </script>

@@ -30,6 +30,23 @@ export const useCounterStore = defineStore("stocks", {
     },
   },
   actions: {
+    // 全商品情報取得
+    async getAllStocks () {
+      try {
+          let { data, error, status } = await supabase
+              .from("stocks")
+              .select("*,items(*)");
+
+          if (error && status !== 406) throw error
+
+          if(data) {
+              this.stocks = data;
+          }
+      }catch (error: any) {
+          console.log(error.message);
+      }
+    },
+    // 全商品の数取得
     async getAllSize () {
       try {
           let { data, error, status } = await supabase
@@ -45,6 +62,17 @@ export const useCounterStore = defineStore("stocks", {
           console.log(error.message);
       }
     },
+    // 商品画像のみ取得
+    getImages (data: any) {
+      const arr = [];
+      arr.push(data.image1, data.image1, data.image2, data.image3, data.image4, data.image5);
+      this.images = arr;
+    },
+    // 商品画像の順番入れ替え
+    sortImage (num: number) {
+      this.images.splice(0, 1, this.images[num + 1]);
+    },
+    // ページング機能実装
     async getPagingStocks (page: number, limit: number) {
       const start = limit * (page - 1);
       const end = start + limit - 1;
@@ -78,6 +106,7 @@ export const useCounterStore = defineStore("stocks", {
       this.page = num;
       window.scrollTo(0, 0);
     },
+    // 絞り込み機能実装
     async getSeriesResult (name: string) {
       try {
         let { data, error, status } = await supabase
@@ -99,6 +128,7 @@ export const useCounterStore = defineStore("stocks", {
             console.log(error.message);
       }
     },
+    // 検索機能実装
     async getSearchResult (keyword: string) {
       try {
         let { data, error, status } = await supabase
@@ -122,11 +152,4 @@ export const useCounterStore = defineStore("stocks", {
       }
     }
   }
-  // const count = ref(0);
-  // const doubleCount = computed(() => count.value * 2);
-  // function increment() {
-  //   count.value++;
-  // }
-
-  // return { count, doubleCount, increment };
 });

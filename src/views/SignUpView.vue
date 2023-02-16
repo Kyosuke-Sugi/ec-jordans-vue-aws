@@ -317,12 +317,12 @@ const citySuggest = async () => {
             </div>
             <div class="w-3/4 mx-auto my-10">
               <div class="flex justify-start items-center">
-                <label htmlFor="password" class="mr-3">
+                <label htmlFor="password_confirm" class="mr-3">
                   <span class="bg-red-700 text-white p-1 rounded-lg mr-3">必須</span>パスワード(確認用)
                 </label>
                 <input
                   type="password"
-                  id="password"
+                  id="password_confirm"
                   @blur="passwordCheck"
                   class=" bg-slate-100 mr-3 py-2 px-3"
                   :value="passwordConfirm"

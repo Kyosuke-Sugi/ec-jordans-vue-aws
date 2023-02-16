@@ -8,7 +8,6 @@ const userID: any = ref("");
 
 onMounted(() => {
     userID.value = useCookie();
-    console.log(userID.value);
 })
 
 </script>

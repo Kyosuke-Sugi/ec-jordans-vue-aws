@@ -6,25 +6,25 @@ import { computed } from "vue";
 import { useRouter } from "vue-router";
 import FavoButton from "../components/favorite/FavoButton.vue";
 import CartButton from "../components/cart/CartButton.vue";
+import { useCounterStore } from "@/stores/counter";
+import { storeToRefs } from "pinia";
 
 const stock  = defineProps(['detail']);
-const router = useRouter();
+const store = useCounterStore();
+const { images } = storeToRefs(store);
 
 const data = computed(() => {
     return stock?.detail
 })
 
-const addFavo = () => {
-  const userID = useCookie();
+onMounted(() => {
+  store.getImages(data.value);
+})
 
-  if(userID) {
-    console.log("お気に入り成功");
-  }else {
-    router.push("/login");
-  }
+const changeImage = (num: number) => {
+  store.sortImage(num);
 }
 
-console.log(stock);
 </script>
 
 <template>
@@ -36,14 +36,26 @@ console.log(stock);
         </div>
         <div class="flex justify-between items-center">
             <div class="w-1/3">
-                <div class="mb-5">
-                    <img :src="'/' + data.image1" :alt="data.items?.name" class="w-full">
-                </div>
-                <ul class="w-full flex">
-                    <li class="w-1/3"><img :src="'/' + data.image2" :alt="data.items?.name" class="w-full"></li>
-                    <li class="w-1/3"><img :src="'/' + data.image3" :alt="data.items?.name" class="w-full"></li>
-                    <li class="w-1/3"><img :src="'/' + data.image4" :alt="data.items?.name" class="w-full"></li>
-                </ul>
+              <div class="w-full grid grid-rows-1 grid-cols-5 gap-y-2">
+                  <div class="col-span-5">
+                    <img :src="'/' + images[0]" alt="イメージ１" class="w-full">
+                  </div>
+                  <div class="row-span-1 col-span-1" v-for="(image, num) in images.filter((_, i) => i !== 0)">
+                    <input 
+                      type="checkbox"
+                      :id="'image' + num"
+                      :name="'image' + num" 
+                      class="peer hidden w-full"
+                      :checked="images[0] === image"
+                      :disabled="images[0] === image"
+                      @change="changeImage(num)"
+                    >
+                    <label :htmlFor="'image' + num" class="peer-checked:opacity-40 cursor-pointer">
+                      <img :src="'/' + image" :alt="'image' + num " class="w-full">
+                    </label>
+                  </div>
+              </div>
+              <p class="text-sm my-4">※クリックすると画面に表示されます</p>
             </div>
             <div class="w-96 mr-14">
                 <div class="text-xl text-[#]">
@@ -69,6 +81,12 @@ console.log(stock);
                   <CartButton :cart="data" />
                 </div>
             </div>
+        </div>
+        <div class="my-10">
+          <h2 class="text-xl font-bold my-5">商品説明</h2>
+          <p>
+            {{ data.items.description }}
+          </p>
         </div>
     </div>
 </template>

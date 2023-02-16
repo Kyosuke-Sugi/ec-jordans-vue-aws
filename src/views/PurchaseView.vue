@@ -101,7 +101,6 @@ onMounted(async () => {
                 
                 if(getData) {
                   const user = getData[0];
-                  console.log(user);
                   lastName.value = user.last_name;
                   firstName.value = user.first_name;
                   lastKana.value = user.kana_last_name;
@@ -119,6 +118,25 @@ onMounted(async () => {
     }
   }
 });
+
+const citySuggest = async () => {
+    const res = await fetch(
+      `https://api.zipaddress.net/?zipcode=${postCode.value}`,
+      {
+        mode: "cors",
+      }
+    );
+    const result = await res.json();
+
+    //存在しない郵便番号の場合、アラートを返す
+    if (result.code === 404 || result.code === 400) {
+      alert("存在しない郵便番号です");
+      return;
+    }
+
+    prefecture.value = result.data.pref;
+    city.value = result.data.address;
+  };
 
 </script>
 
@@ -288,8 +306,10 @@ onMounted(async () => {
               v-model="postCode"
             />
             <input
-              type="button"
-              value="住所を自動入力"
+                type="button"
+                value="住所を自動入力"
+                @click="citySuggest"
+                class=" cursor-pointer"
             />
             <p class="text-red-600">{{ errors.postCode }}</p>
           </div>

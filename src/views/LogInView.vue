@@ -14,7 +14,6 @@ const loginCheck = () => {
         password: password.value
     }
     store.addInfo(info);
-    console.log(info)
 }
 
 </script>

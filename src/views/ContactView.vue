@@ -56,7 +56,6 @@ onMounted(async () => {
                 
                 if(getData) {
                   const user = getData[0];
-                  console.log(user);
                   lastName.value = user.last_name;
                   firstName.value = user.first_name;
                   lastKana.value = user.kana_last_name;

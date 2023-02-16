@@ -19,7 +19,9 @@ const { localCart, memberCart } = storeToRefs(store);
 onMounted(() => {
     userID.value = useCookie();
     store.getLocalCart();
-    store.getMemberCart(userID.value);
+    if(userID.value) {
+        store.getMemberCart(userID.value);
+    }
 })
 
 const addToLocalCart = (stock: any) => {
