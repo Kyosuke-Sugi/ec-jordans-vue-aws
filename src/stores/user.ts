@@ -32,7 +32,7 @@ export const useLoginStore = defineStore("login", {
               this.flag = false
 
               const now = new Date();
-              now.setMinutes(now.getMinutes() + 5);
+              now.setHours(now.getHours() + 1);
               document.cookie = `userID=${obj.id}; Path=/; expires=${now.toUTCString()}; `;
               document.cookie = `userName=${encodeURI(obj.last_name + obj.first_name)};  Path=/; expires=${now.toUTCString()} `;
               history.back();
