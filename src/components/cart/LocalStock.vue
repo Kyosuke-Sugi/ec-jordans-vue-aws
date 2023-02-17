@@ -3,6 +3,7 @@ import { onMounted } from 'vue';
 import { useCartStore } from '@/stores/cart';
 import { storeToRefs } from 'pinia';
 import type { Stock } from '@/types/types';
+import { TrashIcon } from '@heroicons/vue/20/solid';
 
 const store = useCartStore();
 const { localCart, total } = storeToRefs(store);
@@ -39,7 +40,9 @@ const deleteItem = (localCart: Stock[], id: number) => {
                   <select id="count">
                     <option value="1">1</option>
                   </select>
-                  <button @click="deleteItem(localCart, stock.id)">削除ボタン</button>
+                  <button @click="deleteItem(localCart, stock.id)" class="w-8 ml-3">
+                   <TrashIcon /> 
+                  </button>
                 </li>
               </ul>
           </div>

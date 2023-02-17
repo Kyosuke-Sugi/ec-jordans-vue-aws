@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import { useMyPageStore } from "../stores/mypage";
 import { useCookie } from "@/useCookie";
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted } from "vue";
 import type { Ref } from "vue";
 import SignIn from "../components/signIn/SignIn.vue";
 import { storeToRefs } from "pinia";
+import { TrashIcon } from "@heroicons/vue/20/solid";
 
 const userID: Ref<string | undefined> = ref("");
 const store = useMyPageStore();
@@ -63,7 +64,11 @@ const deleteEvent = async (stockID: number) => {
                           <td class="text-center w-1/6 py-5 border border-slate-200">{{ stock.stocks.size }}</td>
                           <td class="text-center w-1/6 py-5 border border-slate-200"><img class="w-1/2 mx-auto" :src="stock.stocks.image1" :alt="stock.stocks.items?.name"></td>
                           <td class="text-center w-1/6 py-5 border border-slate-200">{{ stock.stocks.condition }}</td>
-                          <td class="text-center w-1/12 py-5 border border-slate-200"><button @click="deleteEvent(stock.stocks.id)">削除</button></td>
+                          <td class="text-center w-1/12 py-5 border border-slate-200">
+                            <button @click="deleteEvent(stock.stocks.id)">
+                              <TrashIcon class="w-6" />          
+                            </button>
+                          </td>
                         </tr>
                       </tbody>
                   </table>

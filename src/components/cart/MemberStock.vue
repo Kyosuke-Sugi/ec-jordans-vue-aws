@@ -4,6 +4,7 @@ import { useCartStore } from '@/stores/cart';
 import { useCookie } from '@/useCookie';
 import { storeToRefs } from 'pinia';
 import { ref, onMounted, type Ref } from 'vue';
+import { TrashIcon } from "@heroicons/vue/20/solid";
 
 const store = useCartStore();
 
@@ -46,7 +47,9 @@ const deleteItem = async (stockID: number) => {
                     <select id="count">
                       <option value="1">1</option>
                     </select>
-                    <button @click="deleteItem(cart.stocks.id)">削除ボタン</button>
+                    <button @click="deleteItem(cart.stocks.id)" class="w-8 ml-3">
+                      <TrashIcon />
+                    </button>
                   </li>
                 </ul>
             </div>

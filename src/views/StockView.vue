@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import  ItemInfo  from "../components/ItemInfo.vue";
 import { useRoute } from "vue-router";
-import { onMounted, ref } from "@vue/runtime-core";
-import type { Ref } from "vue";
 import { computed } from "vue";
 import { useCounterStore } from "@/stores/counter";
 
@@ -16,9 +14,6 @@ const stock = computed(() => {
         store.getAllStocks();
         return store.getOneItem(id);
     }
-})
-onMounted(() => {
-    console.log(typeof router.params.id)
 })
 
 </script>
