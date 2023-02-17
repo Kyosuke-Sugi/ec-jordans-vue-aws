@@ -2,7 +2,7 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { supabase } from "@/supabase";
 
-type State = {
+export type State = {
   stocks: any[] | [];
   total: number;
   allTotal: number;
@@ -25,7 +25,7 @@ export const useCounterStore = defineStore("stocks", {
     images: [],
   }) as State, 
   getters: {
-    getOneItem: (state) => (id: any) => {
+    getOneItem: (state: State) => (id: number) => {
         return state.stocks.find(stock => stock.id === id);
     },
   },

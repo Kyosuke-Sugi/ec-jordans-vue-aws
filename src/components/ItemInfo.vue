@@ -1,19 +1,17 @@
 <script setup lang="ts">
-import { useCookie } from "@/useCookie";
-import { ref, toRef } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
-import { computed } from "vue";
-import { useRouter } from "vue-router";
+import { computed, type ComputedRef } from "vue";
 import FavoButton from "../components/favorite/FavoButton.vue";
 import CartButton from "../components/cart/CartButton.vue";
 import { useCounterStore } from "@/stores/counter";
 import { storeToRefs } from "pinia";
+import type { Stock } from "@/types/types";
 
 const stock  = defineProps(['detail']);
 const store = useCounterStore();
 const { images } = storeToRefs(store);
 
-const data = computed(() => {
+const data: ComputedRef<Stock> = computed(() => {
     return stock?.detail
 })
 

@@ -1,12 +1,17 @@
 <script lang="ts" setup>
 import { useCookie, useName } from '@/useCookie';
-import { useLoginStore } from '@/stores/user';
-import { watch, ref, onMounted } from 'vue';
+import { useLoginStore, type User } from '@/stores/user';
+import { watch, ref } from 'vue';
 import type { Ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, type Router } from 'vue-router';
+import type { Store } from 'pinia';
+import type { UserInfo } from "../types/types";
 
-const router = useRouter();
-const store = useLoginStore();
+const router: Router = useRouter();
+const store: Store<"login", User, {}, {
+    addInfo(info: UserInfo): Promise<void>;
+    removeInfo(): void;
+}> = useLoginStore();
 
 const userID: Ref<string | undefined> = ref("");
 const userName: Ref<string | undefined> = ref("");
@@ -16,7 +21,7 @@ watch(router.currentRoute, () => {
   userName.value = useName();
 })
 
-const logoutEvent = () => {
+const logoutEvent: () => void = () => {
   store.removeInfo();
   location.reload();
 }

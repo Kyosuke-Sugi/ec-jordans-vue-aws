@@ -10,7 +10,7 @@ const range = (start: number, end: number) => {
         return [...Array(end - start + 1)].map((_, i) => start + i);
 }
 
-const reset = () => {
+const reset: () => void = () => {
     window.scrollTo(0, 0);
     location.reload();
 }

@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import LocalStock from "./LocalStock.vue";
-import TotalPrice from "./TotalPrice.vue";
 </script>
 
 <template>

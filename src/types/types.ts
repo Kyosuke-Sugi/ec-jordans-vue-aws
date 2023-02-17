@@ -1,0 +1,145 @@
+import { type } from "os";
+
+export type Item = {
+  id: number;
+  name: string;
+  series: string;
+  year: number;
+  description: string;
+  setprice: string;
+  color: string;
+  deleted: boolean;
+};
+
+export type Stock = {
+  id: number;
+  itemID: number;
+  price: number;
+  size: number;
+  image1: string;
+  image2: string;
+  image3: string;
+  image4: string;
+  image5: string;
+  amount: number;
+  arrival: Date;
+  condition: string;
+  deleted: boolean;
+  items: Item;
+};
+
+export type Users = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  kana_first_name: string;
+  kana_last_name: string;
+  email: string;
+  password: string;
+  zip_code: string;
+  prefecture: string;
+  city: string;
+  address: string;
+  building: string | null;
+  phone: string;
+};
+
+export type FavoriteItem = {
+  id: number;
+  user_id: number;
+  stock_id: number;
+  stocks: Stock;
+};
+
+export type FavoriteItem2 = {
+  condition: string;
+  imagePath: string;
+  size: number;
+  price: number;
+  name: string;
+  id: number;
+  itemId: number;
+  cookieName: string | undefined;
+};
+
+export type ShoppingCart = {
+  id: number;
+  user_id: number
+  stock_id: number;
+  stocks: Stock;
+};
+
+export type Order = {
+  id: number;
+  userId: string;
+  totalPrice: number;
+  orderDate: string;
+  note: string;
+  paymentMethod: string;
+  shipStatus: string;
+};
+
+export type OrderItems = {
+  id: number;
+  stockId: number[];
+  orderId: number[];
+  stocks: Stock;
+  order: Order
+};
+
+export type UsedItems = {
+  receptionDate: string;
+  cookieName: string | undefined;
+  sellerLastName: string;
+  sellerFirstName: string;
+  sellerKanaLastName: string;
+  sellerKanaFirstName: string;
+  sellerPhoneNumber: string;
+  sellerEmail: string;
+  sellerZipCode: string;
+  sellerPrefecture: string;
+  sellerCity: string;
+  sellerAddress: string;
+  sellerBuilding: string | undefined;
+  itemName: string;
+  itemCode: string;
+  itemSize: string;
+  itemColor: string;
+  itemNote: string;
+  itemStatus: "完了" | "買取処理中";
+  id: number;
+};
+
+export type TopUsedItems = {
+  receptionDate: string;
+  itemName: string;
+  itemCode: string;
+  itemSize: string;
+  itemColor: string;
+  itemStatus: "完了" | "買取処理中";
+  id: number;
+};
+
+// Redux Store用
+
+export type AllStocks = {
+  allStocks: {
+    stock: [] | Stock[];
+    page: number;
+    limit: number;
+    total: number;
+    allTotal: number;
+    keyword: string;
+  }
+}
+
+export type CartState = {
+  cart: ShoppingCart[]; 
+  localCart: [{stock_id: any}]; 
+  loading: boolean
+}
+
+export type UserInfo = {
+  userID: string | undefined;
+  password: string | undefined;
+}

@@ -1,26 +1,30 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, type Ref } from 'vue';
 import { useCounterStore } from '@/stores/counter';
 import { storeToRefs } from 'pinia';
 
 const store = useCounterStore();
 const { page, limit } = storeToRefs(store);
 
-const data = ref({
+const data: Ref<{
+    notifyFrequency: string;
+}> = ref({
     notifyFrequency: ""
 });
 
-const handleFrequency = (e: any) => {
-    if(e.target.value === data.value.notifyFrequency){
-        data.value.notifyFrequency = "";
-    }else {
-        data.value.notifyFrequency = e.target.value;
-    }
-
-    if(e.target.checked) {
-        store.getSeriesResult(e.target.value);
-    } else {
-        store.getPagingStocks(page.value, limit.value);
+const handleFrequency = (e: Event) => {
+    if(e.target instanceof HTMLInputElement){
+        if(e.target.value === data.value.notifyFrequency){
+            data.value.notifyFrequency = "";
+        }else {
+            data.value.notifyFrequency = e.target.value;
+        }
+    
+        if(e.target.checked) {
+            store.getSeriesResult(e.target.value);
+        } else {
+            store.getPagingStocks(page.value, limit.value);
+        }
     }
 }
 </script>

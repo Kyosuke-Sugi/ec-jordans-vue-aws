@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, type Router } from 'vue-router';
 
-const router = useRouter();
+const router: Router = useRouter();
 
 onMounted(() => {
     const cookie = document.cookie;

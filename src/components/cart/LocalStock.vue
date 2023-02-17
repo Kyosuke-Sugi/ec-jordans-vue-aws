@@ -2,7 +2,7 @@
 import { onMounted } from 'vue';
 import { useCartStore } from '@/stores/cart';
 import { storeToRefs } from 'pinia';
-import { computed } from 'vue';
+import type { Stock } from '@/types/types';
 
 const store = useCartStore();
 const { localCart, total } = storeToRefs(store);
@@ -12,7 +12,7 @@ onMounted(() => {
     store.getLocalCart();
 })
 
-const deleteItem = (localCart: any, id: number) => {
+const deleteItem = (localCart: Stock[], id: number) => {
     store.deleteLocalCart(localCart, id);
     store.getLocalCart();
 }

@@ -3,22 +3,24 @@ import CautionMark from "./CautionMark.vue";
 import { useCartStore } from '@/stores/cart';
 import { useCookie } from '@/useCookie';
 import { storeToRefs } from 'pinia';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, type Ref } from 'vue';
 
 const store = useCartStore();
 
-const { memberCart,localCart, total } = storeToRefs(store);
+const { memberCart, localCart, total } = storeToRefs(store);
  
-const userID: any = ref("");
+const userID: Ref<string | undefined> = ref("");
 onMounted(() => {
     userID.value = useCookie();
     store.getLocalCart();
     store.getMemberCart(userID.value);
 })
 
-const deleteItem = async (userID:number, stockID:number) => {
-    await store.deleteMemberCart(userID, stockID);
-    store.getMemberCart(userID);
+const deleteItem = async (stockID: number) => {
+    if(userID.value) {
+      await store.deleteMemberCart(parseInt(userID.value), stockID);
+      store.getMemberCart(userID.value);
+    }
 }
 
 </script>
@@ -44,7 +46,7 @@ const deleteItem = async (userID:number, stockID:number) => {
                     <select id="count">
                       <option value="1">1</option>
                     </select>
-                    <button @click="deleteItem(userID, cart.stocks.id)">削除ボタン</button>
+                    <button @click="deleteItem(cart.stocks.id)">削除ボタン</button>
                   </li>
                 </ul>
             </div>

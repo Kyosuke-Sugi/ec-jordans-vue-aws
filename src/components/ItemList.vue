@@ -1,11 +1,8 @@
 <script lang="ts" setup>
 import { useCounterStore } from "@/stores/counter";
-import { ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 import { watch } from "vue";
 import { storeToRefs } from "pinia";
-import type { Ref } from "vue";
-import { supabase } from "../supabase";
 
 const store = useCounterStore();
 const { stocks, page, limit, allTotal  } = storeToRefs(store);

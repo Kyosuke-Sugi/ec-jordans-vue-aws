@@ -1,10 +1,25 @@
 <script lang="ts" setup>
 import { supabase } from '@/supabase';
+import type { Users } from '@/types/types';
 import { useCookie } from '@/useCookie';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, type Ref } from 'vue';
 
-const userID: any = ref("");
-const userInfo: any = ref({});
+const userID: Ref<string | undefined> = ref("");
+const userInfo: Ref<Users> = ref({
+    id: NaN,
+    first_name: "",
+    last_name: "",
+    kana_first_name: "",
+    kana_last_name: "",
+    email: "",
+    password: "",
+    zip_code: "",
+    prefecture: "",
+    city: "",
+    address: "",
+    building: "",
+    phone: ""
+});
 
 onMounted(async () => {
     userID.value = useCookie();

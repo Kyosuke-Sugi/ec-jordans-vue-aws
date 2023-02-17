@@ -1,15 +1,16 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, type Ref } from 'vue';
 import { useLoginStore } from "@/stores/user";
 import { storeToRefs } from 'pinia';
+import type { UserInfo } from '@/types/types';
 
 const store = useLoginStore()
-const userID = ref("");
-const password = ref("");
+const userID: Ref<string | undefined> = ref("");
+const password: Ref<string | undefined> = ref("");
 const { flag } = storeToRefs(store);
 
 const loginCheck = () => {
-    const info = {
+    const info: UserInfo = {
         userID: userID.value,
         password: password.value
     }

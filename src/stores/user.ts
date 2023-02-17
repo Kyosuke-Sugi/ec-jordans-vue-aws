@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 import { supabase } from "@/supabase";
+import type { UserInfo } from "@/types/types";
 
-type User = {
+export type User = {
     flag: boolean
 }
 
@@ -13,7 +14,7 @@ export const useLoginStore = defineStore("login", {
     
   },
   actions: {
-    async addInfo (info: any) {
+    async addInfo (info: UserInfo) {
         try {
             const checkData = await supabase
               .from("users")

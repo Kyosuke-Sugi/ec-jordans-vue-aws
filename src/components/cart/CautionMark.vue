@@ -1,20 +1,22 @@
 <script lang="ts" setup>
 import { useCartStore } from '@/stores/cart';
+import type { ShoppingCart, Stock } from '@/types/types';
 import { useCookie } from '@/useCookie';
 import { storeToRefs } from 'pinia';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, type Ref } from 'vue';
+import { boolean } from 'yup';
 
 
 const store = useCartStore();
 
 const { memberCart, localCart } = storeToRefs(store);
 
-const userID: any = ref("");
+const userID: Ref<string | undefined> = ref("");
 onMounted(() => {
     userID.value = useCookie();
 })
 
-const combineCart = async (memberCart: any, localCart: any, stockID: number) => {
+const combineCart = async (memberCart: Stock[], localCart: Stock[], stockID: number) => {
     store.deleteLocalCart(localCart, stockID);
     store.getLocalCart();
     if (
@@ -22,11 +24,13 @@ const combineCart = async (memberCart: any, localCart: any, stockID: number) => 
     ) {
         store.getMemberCart(userID.value);
     }else {
-        await store.addMemberCart(userID.value, stockID);
+      if(userID.value) {
+        await store.addMemberCart(parseInt(userID.value), stockID);
         store.getMemberCart(userID.value);
+      }
     }
 }
-const rejectCombine = (localCart: any, stockID: number) => {
+const rejectCombine = (localCart: Stock[], stockID: number) => {
     store.deleteLocalCart(localCart, stockID);
     store.getLocalCart();
     store.getMemberCart(userID.value);

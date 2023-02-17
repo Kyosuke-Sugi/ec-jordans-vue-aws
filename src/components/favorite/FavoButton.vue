@@ -1,29 +1,30 @@
 <script lang="ts" setup>
 import { useMyPageStore } from '@/stores/mypage';
+import type { Stock } from '@/types/types';
 import { useCookie } from '@/useCookie';
 import { storeToRefs } from 'pinia';
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, type Ref, type ComputedRef } from 'vue';
 import { useRouter } from 'vue-router';
 
 const data = defineProps(['favo']);
 
-const stock = computed(() => {
+const stock: ComputedRef<Stock> = computed(() => {
     return data?.favo
 })
 
 const router = useRouter();
-const userID: any = ref("")
+const userID: Ref<string | undefined> = ref("")
 const store = useMyPageStore();
 const { favorite } = storeToRefs(store);
 
 onMounted(() => {
     userID.value = useCookie();
     if(userID.value) {
-      store.getFavorite(userID.value);
+      store.getFavorite(parseInt(userID.value));
     }
 });
 
-const addFavo = async (stock: any) => {
+const addFavo = async (stock: Stock) => {
   const userID = useCookie();
 
   if(userID) {

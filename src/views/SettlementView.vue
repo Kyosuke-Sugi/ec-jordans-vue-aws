@@ -1,18 +1,18 @@
 <script lang="ts" setup>
 import SignIn from "../components/signIn/SignIn.vue";
 import AddressInfo from "../components/settlement/AddressInfo.vue";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, type Ref } from "vue";
 import { useCartStore } from "@/stores/cart";
 import { storeToRefs } from "pinia";
 import { useCookie } from "@/useCookie";
-import { useRouter } from "vue-router";
+import { useRouter, type Router } from "vue-router";
 
-const userID: any = ref("");
-const payment = ref("");
+const router: Router = useRouter();
+const userID: Ref<string | undefined> = ref("");
+const payment: Ref<string | undefined> = ref("");
 const store = useCartStore();
-const router = useRouter();
 
-const { memberCart, total, localCart } = storeToRefs(store);
+const { memberCart, total } = storeToRefs(store);
 
 onMounted(async () => {
     userID.value = useCookie();

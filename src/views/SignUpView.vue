@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 import { useField, useForm } from "vee-validate";
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { object, string, number, ref as Ref } from "yup";
+import { ref, type Ref } from "vue";
+import { useRouter, type Router } from "vue-router";
+import { object, string, number, ref as yupRef } from "yup";
 
-const router = useRouter();
-const confirmFlag = ref(false);
+const router: Router = useRouter();
+const confirmFlag: Ref<boolean> = ref(false);
 
 const changeFlag = () => {
   confirmFlag.value = !confirmFlag.value
@@ -51,7 +51,7 @@ const schema = object({
   password: string().required().matches(
     /(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-z0-9]{8,}$/,
   ),
-  passwordConfirm: string().required('*必須項目です').oneOf([Ref('password')], 'パスワードが一致していません')
+  passwordConfirm: string().required('*必須項目です').oneOf([yupRef('password')], 'パスワードが一致していません')
 });
 
 const { errors, meta } = useForm({

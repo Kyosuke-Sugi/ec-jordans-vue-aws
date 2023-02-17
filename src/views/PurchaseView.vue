@@ -2,13 +2,13 @@
 import { supabase } from "@/supabase";
 import { useCookie } from "@/useCookie";
 import { useField, useForm } from "vee-validate";
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { ref, onMounted, type Ref } from "vue";
+import { useRouter, type Router } from "vue-router";
 import { object, string, number } from "yup";
 
-const router = useRouter();
-const confirmFlag = ref(false);
-const userID: any = ref("");
+const router: Router = useRouter();
+const confirmFlag: Ref<boolean> = ref(false);
+const userID: Ref<string | undefined> = ref("");
 
 const changeFlag = () => {
   confirmFlag.value = !confirmFlag.value
