@@ -12,8 +12,10 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@aws-amplify/ui-vue": "^3.1.8",
     "@heroicons/vue": "^2.0.15",
     "@supabase/supabase-js": "^2.7.1",
+    "aws-amplify": "^5.0.15",
     "pinia": "^2.0.28",
     "vee-validate": "^4.7.4",
     "vue": "^3.2.45",
